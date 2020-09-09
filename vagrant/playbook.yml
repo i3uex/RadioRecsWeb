@@ -1,0 +1,38 @@
+---
+- name: Playbook
+  hosts: all
+  remote_user: vagrant
+  become_method: sudo
+  become_user: root
+  become: yes
+
+  tasks:
+
+  - name: Update APT Cache
+    apt:
+      update_cache: yes
+      upgrade: dist
+
+  - name: Install Package Installer for Python 3
+    apt:
+      name: python3-pip
+      state: latest
+
+  - name: Install Python Packages
+    pip:
+      name:
+      - cherrypy
+      - sklearn
+
+#  - name: Checkout CompareFEFS
+#    git:
+#      repo: https://github.com/i3uex/CompareFEFS.git
+#      dest: /home/vagrant/CompareFEFS
+#    become: no
+#
+#  - name: Start CompareFEFS Server
+#    shell: /home/vagrant/CompareFEFS/start.sh
+#    async: 10
+#    args:
+#      chdir: /home/vagrant/CompareFEFS
+#    become: no

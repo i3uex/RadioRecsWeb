@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding-top: 5px;
+}
+
+.full-page {
+    height: 100vh;
+    width: 100vw;
+}

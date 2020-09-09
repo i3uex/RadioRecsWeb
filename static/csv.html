@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CompareFEFS - View Dataset</title>
+	<style>
+		table {
+		  margin: 0 auto;
+		  text-align: center;
+		  border-collapse: collapse;
+		  border: 1px solid #d4d4d4;
+		  height: 500px;
+		}
+
+		tr:nth-child(even) {
+		  background: #d4d4d4;
+		}
+
+		th, td {
+		  padding: 10px 30px;
+		}
+
+		th {
+		  border-bottom: 1px solid #d4d4d4;
+		}
+	</style>
+</head>
+<body>
+
+<script src="csv_to_table.js"></script>
+<script>
+	let url_string = window.location.href
+	let url = new URL(url_string);
+	let csvFile = url.searchParams.get("csv_file");
+
+	let csvToTable = new CsvToTable({
+		csvFile: csvFile
+	});
+	csvToTable.run();
+</script>
+</body>
+</html>
