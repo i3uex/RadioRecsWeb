@@ -3,7 +3,7 @@ $(document).ready(function () {
     // Get providers and algorithms
     $.ajax({
         type: "GET",
-        url: "http://localhost:9090/programs",
+        url: "http://compareml.io:9090/programs",
 
         success: function (programs) {
             const programsParsed = JSON.parse(programs)
