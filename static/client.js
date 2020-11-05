@@ -6,7 +6,6 @@ const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 
 const voicePercentage = urlParams.get("voicePercentage")
-const artists = urlParams.getAll("artists")
 const genres = urlParams.getAll("genres")
 const analyticalPercentage = urlParams.get("analyticalPercentage")
 const angerPercentage = urlParams.get("angerPercentage")
@@ -20,7 +19,6 @@ const topics = urlParams.getAll("topics")
 $(document).ready(function() {
     const musicPercentageItem = $("#musicPercentage")
     const voicePercentageItem = $("#voicePercentage")
-    const artistsItem = $("#artists")
     const genresItem = $("#genres")
     const analyticalPercentageItem = $("#analyticalPercentage")
     const angerPercentageItem = $("#angerPercentage")
@@ -32,7 +30,6 @@ $(document).ready(function() {
     const topicsItem = $("#topics")
 
     voicePercentageItem.val(voicePercentage)
-    artistsItem.val(artists)
     genresItem.val(genres)
     analyticalPercentageItem.val(analyticalPercentage)
     angerPercentageItem.val(angerPercentage)
@@ -55,7 +52,6 @@ $(document).ready(function() {
     if (window.location.pathname === "/static/step4.html") {
         musicPercentageItem.text((100 - voicePercentage) + "%")
         voicePercentageItem.text(voicePercentage + "%")
-        artistsItem.text(artists)
         genresItem.text(genres)
         analyticalPercentageItem.text(analyticalPercentage + "%")
         angerPercentageItem.text(angerPercentage + "%")
