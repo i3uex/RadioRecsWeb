@@ -27,29 +27,23 @@
 
 <section class="h-100">
   <header class="container h-100">
-    <div class="d-flex flex-column">
-      <form action="step5.html" method="get" id="form">
-        <div class="form-group">
-          <h2>Voice options</h2>
-          <h4>Topics</h4>
-          <label for="topics">Touch to select your topics</label>
-          <select class="custom-select" multiple id="topics" name="topics">
-            <option value="Topic 1">Topic 1</option>
-            <option value="Topic 2">Topic 2</option>
-            <option value="Topic 3">Topic 3</option>
-          </select>
-        </div>
-        <input type="hidden" name="voicePercentage" id="voicePercentage"/>
-        <input type="hidden" name="musicGenres" id="musicGenres"/>
-        <input type="hidden" name="analyticalPercentage" id="analyticalPercentage"/>
-        <input type="hidden" name="angerPercentage" id="angerPercentage"/>
-        <input type="hidden" name="confidentPercentage" id="confidentPercentage"/>
-        <input type="hidden" name="fearPercentage" id="fearPercentage"/>
-        <input type="hidden" name="joyPercentage" id="joyPercentage"/>
-        <input type="hidden" name="sadnessPercentage" id="sadnessPercentage"/>
-        <input type="hidden" name="tentativePercentage" id="tentativePercentage"/>
-        <input type="submit" class="btn btn-primary" value="Next"/>
-      </form>
+    <div class="d-flex align-items-center justify-content-center h-100">
+      <div class="d-flex flex-column">
+        <h1>Summary</h1>
+        <ul>
+          <li><b>Music Percentage:</b> <span id="musicPercentage"></span></li>
+          <li><b>Voice Percentage:</b> <span id="voicePercentage"></span></li>
+          <li><b>Genres:</b> <span id="musicGenres"></span></li>
+          <li><b>AnalyticalPercentage:</b> <span id="analyticalPercentage"></span></li>
+          <li><b>Anger Percentage:</b> <span id="angerPercentage"></span></li>
+          <li><b>Confident Percentage:</b> <span id="confidentPercentage"></span></li>
+          <li><b>Fear Percentage:</b> <span id="fearPercentage"></span></li>
+          <li><b>Joy Percentage:</b> <span id="joyPercentage"></span></li>
+          <li><b>Sadness Percentage:</b> <span id="sadnessPercentage"></span></li>
+          <li><b>Tentative Percentage:</b> <span id="tentativePercentage"></span></li>
+          <li><b>Topics:</b> <span id="topics"></span></li>
+        </ul>
+      </div>
     </div>
   </header>
 </section>

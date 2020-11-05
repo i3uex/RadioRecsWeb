@@ -1,6 +1,7 @@
 const musicUrl = "/static/step2.html"
-const voiceUrl = "/static/step3.html"
-const summaryUrl = "/static/step4.html"
+const toneUrl = "/static/step3.html"
+const topicsUrl = "/static/step4.html"
+const summaryUrl = "/static/step5.html"
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
@@ -49,7 +50,7 @@ $(document).ready(function() {
     }
 
 
-    if (window.location.pathname === "/static/step4.html") {
+    if (window.location.pathname === "/static/step5.html") {
         musicPercentageItem.text((100 - voicePercentage) + "%")
         voicePercentageItem.text(voicePercentage + "%")
         musicGenresItem.text(musicGenres)
@@ -72,7 +73,7 @@ function updateMusicVoicePercentage() {
     if (voicePercentage <= 50) {
         $("#form").attr("action", musicUrl)
     } else {
-        $("#form").attr("action", voiceUrl)
+        $("#form").attr("action", toneUrl)
     }
 }
 
@@ -83,6 +84,6 @@ function updateRange(rangeInput, rangeInputLabel, prefix) {
     if (value <= 50) {
         $("#button").attr("href", musicUrl)
     } else {
-        $("#button").attr("href", voiceUrl)
+        $("#button").attr("href", toneUrl)
     }
 }
