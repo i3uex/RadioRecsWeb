@@ -1,5 +1,3 @@
-let musicGenres = [];
-
 $(document).ready(function () {
 
     // Get providers and algorithms
@@ -23,6 +21,6 @@ function populateMusicGenresList(musicGenres) {
             text: musicGenre,
             id: musicGenre
         })
-        .appendTo("#music_genres");
+        .appendTo("#musicGenres");
     })
 }
