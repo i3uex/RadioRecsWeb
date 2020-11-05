@@ -1,7 +1,6 @@
 const musicUrl = "/static/step2.html"
 const toneUrl = "/static/step3.html"
-const topicsUrl = "/static/step4.html"
-const summaryUrl = "/static/step5.html"
+const summaryUrl = "/static/step6.html"
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
@@ -16,6 +15,7 @@ const joyPercentage = urlParams.get("joyPercentage")
 const sadnessPercentage = urlParams.get("sadnessPercentage")
 const tentativePercentage = urlParams.get("tentativePercentage")
 const topics = urlParams.getAll("topics")
+const programs = urlParams.getAll("programs")
 
 $(document).ready(function() {
     const musicPercentageItem = $("#musicPercentage")
@@ -29,6 +29,7 @@ $(document).ready(function() {
     const sadnessPercentageItem = $("#sadnessPercentage")
     const tentativePercentageItem = $("#tentativePercentage")
     const topicsItem = $("#topics")
+    const programsItem = $("#programs")
 
     voicePercentageItem.val(voicePercentage)
     musicGenresItem.val(musicGenres)
@@ -40,17 +41,18 @@ $(document).ready(function() {
     sadnessPercentageItem.val(sadnessPercentage)
     tentativePercentageItem.val(tentativePercentage)
     topicsItem.val(topics)
+    programsItem.val(programs)
 
-    if (window.location.pathname === "/static/step3.html" && voicePercentage > 50) {
+    if (window.location.pathname === toneUrl && voicePercentage > 50) {
         $("#form").attr("action", musicUrl)
     }
 
-    if (window.location.pathname === "/static/step2.html" && voicePercentage > 50) {
+    if (window.location.pathname === musicUrl && voicePercentage > 50) {
         $("#form").attr("action", summaryUrl)
     }
 
 
-    if (window.location.pathname === "/static/step5.html") {
+    if (window.location.pathname === summaryUrl) {
         musicPercentageItem.text((100 - voicePercentage) + "%")
         voicePercentageItem.text(voicePercentage + "%")
         musicGenresItem.text(musicGenres)
@@ -62,6 +64,7 @@ $(document).ready(function() {
         sadnessPercentageItem.text(sadnessPercentage + "%")
         tentativePercentageItem.text(tentativePercentage + "%")
         topicsItem.text(topics)
+        programsItem.text(programs)
     }
 })
 
