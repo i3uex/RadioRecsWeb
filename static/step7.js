@@ -4,7 +4,8 @@ let rs3aResult = ""
 let rs4aResult = ""
 
 $(document).ready(function () {
-    rs1a()
+    // rs1a()
+
 });
 
 function rs1a() {
@@ -111,7 +112,7 @@ function rs4a() {
 
         success: function (result) {
             rs1aResult = JSON.parse(result)
-            makePrediction()
+            showResults()
         },
         error: function () {
             alert('fail')
@@ -119,7 +120,7 @@ function rs4a() {
     });
 }
 
-function makePrediction() {
+function showResults() {
     console.log("rs1aResult: " + rs1aResult)
     console.log("rs2aResult: " + rs2aResult)
     console.log("rs3aResult: " + rs3aResult)
