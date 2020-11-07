@@ -1,20 +1,29 @@
-$(document).ready(function () {
+let rs1aResult = ""
+let rs2aResult = ""
+let rs3aResult = ""
+let rs4aResult = ""
 
-    // Call RS1a
+$(document).ready(function () {
+    rs1a()
+});
+
+function rs1a() {
     $.ajax({
         type: "GET",
         url: "http://localhost:9090/rs1a?voice=" + voicePercentage + "&music=" + (100 - voicePercentage),
 
         success: function (result) {
-            const resultParsed = JSON.parse(result)
-            processResult(resultParsed)
+            console.log(result)
+            rs1aResult = JSON.parse(result)
+            rs2a()
         },
         error: function () {
             alert('fail')
         }
     });
+}
 
-    // Call RS2a
+function rs2a() {
     let musicGenresArguments = ""
     let musicGenresString = musicGenres.toString()
     let musicGenresList = musicGenresString.split(",")
@@ -31,15 +40,16 @@ $(document).ready(function () {
         url: "http://localhost:9090/rs2a?" + musicGenresArguments,
 
         success: function (result) {
-            const resultParsed = JSON.parse(result)
-            processResult(resultParsed)
+            rs2aResult = JSON.parse(result)
+            rs3a()
         },
         error: function () {
             alert('fail')
         }
     });
+}
 
-    // Call RS3a
+function rs3a() {
     let topicsArguments = ""
     let topicsString = topics.toString()
     let topicsList = topicsString.split(",")
@@ -75,15 +85,16 @@ $(document).ready(function () {
         url: "http://localhost:9090/rs3a?" + topicsArguments,
 
         success: function (result) {
-            const resultParsed = JSON.parse(result)
-            processResult(resultParsed)
+            rs3aResult = JSON.parse(result)
+            rs4a()
         },
         error: function () {
             alert('fail')
         }
     });
+}
 
-    // Call RS4a
+function rs4a() {
     let toneArguments = ""
 
     toneArguments += "analytical=" + (analyticalPercentage / 100) + "&"
@@ -94,22 +105,23 @@ $(document).ready(function () {
     toneArguments += "sadness=" + (sadnessPercentage / 100) + "&"
     toneArguments += "tentative=" + (tentativePercentage / 100)
 
-    console.log("tonesArguments: " + toneArguments)
-
     $.ajax({
         type: "GET",
         url: "http://localhost:9090/rs4a?" + toneArguments,
 
         success: function (result) {
-            const resultParsed = JSON.parse(result)
-            processResult(resultParsed)
+            rs1aResult = JSON.parse(result)
+            makePrediction()
         },
         error: function () {
             alert('fail')
         }
     });
-});
+}
 
-function processResult(result) {
-    console.log(result)
+function makePrediction() {
+    console.log("rs1aResult: " + rs1aResult)
+    console.log("rs2aResult: " + rs2aResult)
+    console.log("rs3aResult: " + rs3aResult)
+    console.log("rs4aResult: " + rs4aResult)
 }
