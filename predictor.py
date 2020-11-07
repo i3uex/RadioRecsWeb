@@ -33,16 +33,16 @@ class RecommendationSystem(object):
                       f"programs={programs})")
 
         try:
-            RecommendationSystem.rs1a(
+            rs1a_response = RecommendationSystem.rs1a(
                 voice_percentage
             )
-            RecommendationSystem.rs2a(
+            rs2a_response = RecommendationSystem.rs2a(
                 music_genres
             )
-            RecommendationSystem.rs3a(
+            rs3a_response = RecommendationSystem.rs3a(
                 topics
             )
-            RecommendationSystem.rs4a(
+            rs4a_response = RecommendationSystem.rs4a(
                 analytical_percentage,
                 anger_percentage,
                 confident_percentage,
@@ -51,6 +51,12 @@ class RecommendationSystem(object):
                 sadness_percentage,
                 tentative_percentage
             )
+
+            logging.debug(f"rs1a_response: {rs1a_response}")
+            logging.debug(f"rs2a_response: {rs2a_response}")
+            logging.debug(f"rs3a_response: {rs3a_response}")
+            logging.debug(f"rs4a_response: {rs4a_response}")
+
         except Exception as exception:
             message = f"{str(exception)}"
             raise cherrypy.HTTPError(500, message=message)
