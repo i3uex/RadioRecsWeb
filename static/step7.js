@@ -1,10 +1,4 @@
-let rs1aResult = ""
-let rs2aResult = ""
-let rs3aResult = ""
-let rs4aResult = ""
-
 $(document).ready(function () {
-    // rs1a()
     makePrediction()
 });
 
@@ -23,16 +17,38 @@ function makePrediction() {
         programs: programs
     });
 
+    $('#restart_button').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Processing...').addClass('disabled')
+    $("#patient_warning").show()
+
     $.ajax({
         type: "POST",
         data: {data},
         url: "/make_prediction",
 
-        success: function (result) {
-            console.log(result)
+        success: function (prediction) {
+            const predictionParsed = JSON.parse(prediction)
+            populatePredictionList(predictionParsed)
+            stopProcessing()
         },
-        error: function () {
-            alert('fail');
+        error: function (errorMessage) {
+            alert(errorMessage)
+            stopProcessing()
         }
     });
+}
+
+function populatePredictionList(prediction) {
+    prediction.forEach(program => {
+        $('<li class="list-group-item">' + program + '</li>').appendTo("#prediction")
+    })
+}
+
+function stopProcessing() {
+    $('#restart_button').html('Restart')
+    $("#restart_button").removeClass("disabled")
+    $("#patient_warning").hide()
+}
+
+function restart() {
+    window.location.href = "/static/";
 }

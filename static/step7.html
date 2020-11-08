@@ -28,9 +28,19 @@
 <section class="h-100">
   <header class="container h-100">
     <div class="d-flex flex-column">
-      <form action="step6.html" method="get" id="form">
+      <form action="step1.html" method="get" id="form">
         <div class="form-group">
           <h2>Prediction</h2>
+          <ol class="list-group" id="prediction">
+          </ol>
+        </div>
+        <div class="form-group">
+          <div id="start_button_div" class="row justify-content-center margin_bot">
+            <button type="button" id="restart_button" class="btn btn-primary disabled" onclick="restart()">Start
+            </button>
+          </div>
+          <p class="text-center small" id="patient_warning" style="display:none">Predictions may take time, please be
+            patient</p>
         </div>
       </form>
     </div>

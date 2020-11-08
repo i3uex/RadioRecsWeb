@@ -1,3 +1,4 @@
+import json
 import logging
 
 import cherrypy
@@ -34,8 +35,15 @@ class RecommendationSystem(object):
                       f"programs={programs})")
 
         try:
-            voice_percentage = int(voice_percentage)
-            music_percentage = 100 - voice_percentage
+            voice_percentage = int(voice_percentage) / 100
+            music_percentage = 1 - voice_percentage
+            analytical_percentage = int(analytical_percentage) / 100
+            anger_percentage = int(anger_percentage) / 100
+            confident_percentage = int(confident_percentage) / 100
+            fear_percentage = int(fear_percentage) / 100
+            joy_percentage = int(joy_percentage) / 100
+            sadness_percentage = int(sadness_percentage) / 100
+            tentative_percentage = int(tentative_percentage) / 100
 
             rs1a_response = RecommendationSystem.rs1a(
                 music_percentage, voice_percentage
@@ -94,6 +102,7 @@ class RecommendationSystem(object):
                         voice_percentage * (weights_dataframe["wrs3a"] + weights_dataframe["wrs4a"]) / 2
                 )
             weights_dataframe.sort_values(by=["wrs"], ascending=False, inplace=True)
+            result = weights_dataframe.index.values.tolist()[:5]
 
             logging.debug(f"- rs1a_dataframe: {rs1a_dataframe.describe()}")
             logging.debug(f"- rs2a_dataframe: {rs2a_dataframe.describe()}")
@@ -105,7 +114,7 @@ class RecommendationSystem(object):
             message = f"{str(exception)}"
             raise cherrypy.HTTPError(500, message=message)
 
-        return "yeah"
+        return json.dumps(result)
 
     @staticmethod
     def rs1a(music_percentage, voice_percentage):

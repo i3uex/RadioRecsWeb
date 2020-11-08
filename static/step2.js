@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    // Get providers and algorithms
     $.ajax({
         type: "GET",
         url: "http://localhost:9090/music_genres",
