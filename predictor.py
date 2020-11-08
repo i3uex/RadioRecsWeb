@@ -64,9 +64,6 @@ class RecommendationSystem(object):
                 tentative_percentage
             )
 
-            if programs:
-                logging.debug("- should do something with those programs...")
-
             logging.debug(f"- rs1a_response: {rs1a_response}")
             logging.debug(f"- rs2a_response: {rs2a_response}")
             logging.debug(f"- rs3a_response: {rs3a_response}")
@@ -77,37 +74,77 @@ class RecommendationSystem(object):
             rs3a_dataframe = pandas.read_json(rs3a_response.text, orient="records")
             rs4a_dataframe = pandas.read_json(rs4a_response.text, orient="records")
 
+            if programs:
+                programs_list = programs[0].replace(",", "|")
+
+                rs1b_response = RecommendationSystem.rsb(1, programs_list)
+                rs2b_response = RecommendationSystem.rsb(2, programs_list)
+                rs3b_response = RecommendationSystem.rsb(3, programs_list)
+                rs4b_response = RecommendationSystem.rsb(4, programs_list)
+
+                rs1b_dataframe = pandas.read_json(rs1b_response.text, orient="records")
+                rs2b_dataframe = pandas.read_json(rs2b_response.text, orient="records")
+                rs3b_dataframe = pandas.read_json(rs3b_response.text, orient="records")
+                rs4b_dataframe = pandas.read_json(rs4b_response.text, orient="records")
+            else:
+                rs1b_dataframe = rs1a_dataframe.copy()
+                rs2b_dataframe = rs1a_dataframe.copy()
+                rs3b_dataframe = rs1a_dataframe.copy()
+                rs4b_dataframe = rs1a_dataframe.copy()
+
             rs2a_dataframe.drop(["_nombre"], axis=1, inplace=True)
             rs3a_dataframe.drop(["_nombre"], axis=1, inplace=True)
             rs4a_dataframe.drop(["_nombre"], axis=1, inplace=True)
+            rs1b_dataframe.drop(["_nombre"], axis=1, inplace=True)
+            rs2b_dataframe.drop(["_nombre"], axis=1, inplace=True)
+            rs3b_dataframe.drop(["_nombre"], axis=1, inplace=True)
+            rs4b_dataframe.drop(["_nombre"], axis=1, inplace=True)
 
             weights_dataframe = pandas.concat([
                 rs1a_dataframe,
+                rs1b_dataframe,
                 rs2a_dataframe,
+                rs2b_dataframe,
                 rs3a_dataframe,
-                rs4a_dataframe], axis=1)
+                rs3b_dataframe,
+                rs4a_dataframe,
+                rs4b_dataframe
+            ], axis=1)
             weights_dataframe.columns = [
                 "program_name",
                 "wrs1a",
+                "wrs1b",
                 "wrs2a",
+                "wrs2b",
                 "wrs3a",
-                "wrs4a"
+                "wrs3b",
+                "wrs4a",
+                "wrs4b"
             ]
             weights_dataframe.set_index("program_name", inplace=True)
+            weights_dataframe["wrs1"] = (weights_dataframe["wrs1a"] + weights_dataframe["wrs1b"]) / 2
+            weights_dataframe["wrs2"] = (weights_dataframe["wrs2a"] + weights_dataframe["wrs2b"]) / 2
+            weights_dataframe["wrs3"] = (weights_dataframe["wrs3a"] + weights_dataframe["wrs3b"]) / 2
+            weights_dataframe["wrs4"] = (weights_dataframe["wrs4a"] + weights_dataframe["wrs4b"]) / 2
 
             weights_dataframe["wrs"] = \
-                0.25 * weights_dataframe["wrs1a"] + \
+                0.25 * weights_dataframe["wrs1"] + \
                 0.75 * (
-                        music_percentage * weights_dataframe["wrs2a"] +
-                        voice_percentage * (weights_dataframe["wrs3a"] + weights_dataframe["wrs4a"]) / 2
+                        music_percentage * weights_dataframe["wrs2"] +
+                        voice_percentage * (weights_dataframe["wrs3"] + weights_dataframe["wrs4"]) / 2
                 )
             weights_dataframe.sort_values(by=["wrs"], ascending=False, inplace=True)
             result = weights_dataframe.index.values.tolist()[:5]
 
             logging.debug(f"- rs1a_dataframe: {rs1a_dataframe.describe()}")
+            logging.debug(f"- rs1b_dataframe: {rs1b_dataframe.describe()}")
             logging.debug(f"- rs2a_dataframe: {rs2a_dataframe.describe()}")
+            logging.debug(f"- rs2b_dataframe: {rs2b_dataframe.describe()}")
             logging.debug(f"- rs3a_dataframe: {rs3a_dataframe.describe()}")
+            logging.debug(f"- rs3b_dataframe: {rs3b_dataframe.describe()}")
             logging.debug(f"- rs4a_dataframe: {rs4a_dataframe.describe()}")
+            logging.debug(f"- rs4b_dataframe: {rs4b_dataframe.describe()}")
+
             logging.debug(f"- weights_dataframe: {weights_dataframe.describe()}")
 
         except Exception as exception:
@@ -231,6 +268,23 @@ class RecommendationSystem(object):
 
             logging.debug(f"- tone_arguments: {tone_arguments}")
             url = f"http://localhost:9090/rs4a?{tone_arguments}"
+            logging.debug(f"- url: {url}")
+            response = requests.get(url)
+            logging.debug(f"- response.status_code: {response.status_code}")
+        except Exception as exception:
+            message = f"{str(exception)}"
+            raise cherrypy.HTTPError(500, message=message)
+
+        return response
+
+    @staticmethod
+    def rsb(service, programs):
+        logging.debug(f"RecommendationSystem.rsb("
+                      f"service={service}, "
+                      f"programs={programs})")
+
+        try:
+            url = f"http://localhost:9090/rs{service}b?like={programs}"
             logging.debug(f"- url: {url}")
             response = requests.get(url)
             logging.debug(f"- response.status_code: {response.status_code}")
