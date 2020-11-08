@@ -1,6 +1,7 @@
 import logging
 
 import cherrypy
+import pandas
 import requests
 
 
@@ -52,10 +53,42 @@ class RecommendationSystem(object):
                 tentative_percentage
             )
 
-            logging.debug(f"rs1a_response: {rs1a_response}")
-            logging.debug(f"rs2a_response: {rs2a_response}")
-            logging.debug(f"rs3a_response: {rs3a_response}")
-            logging.debug(f"rs4a_response: {rs4a_response}")
+            if programs:
+                logging.debug("- should do something with those programs...")
+
+            logging.debug(f"- rs1a_response: {rs1a_response}")
+            logging.debug(f"- rs2a_response: {rs2a_response}")
+            logging.debug(f"- rs3a_response: {rs3a_response}")
+            logging.debug(f"- rs4a_response: {rs4a_response}")
+
+            rs1a_dataframe = pandas.read_json(rs1a_response.text, orient="records")
+            rs2a_dataframe = pandas.read_json(rs2a_response.text, orient="records")
+            rs3a_dataframe = pandas.read_json(rs3a_response.text, orient="records")
+            rs4a_dataframe = pandas.read_json(rs4a_response.text, orient="records")
+
+            rs2a_dataframe.drop(["_nombre"], axis=1, inplace=True)
+            rs3a_dataframe.drop(["_nombre"], axis=1, inplace=True)
+            rs4a_dataframe.drop(["_nombre"], axis=1, inplace=True)
+
+            weights_dataframe = pandas.concat([
+                rs1a_dataframe,
+                rs2a_dataframe,
+                rs3a_dataframe,
+                rs4a_dataframe], axis=1)
+            weights_dataframe.columns = [
+                "program_name",
+                "wrs1a",
+                "wrs2a",
+                "wrs3a",
+                "wrs4a"
+            ]
+            weights_dataframe.set_index("program_name", inplace=True)
+
+            logging.debug(f"- rs1a_dataframe: {rs1a_dataframe.describe()}")
+            logging.debug(f"- rs2a_dataframe: {rs2a_dataframe.describe()}")
+            logging.debug(f"- rs3a_dataframe: {rs3a_dataframe.describe()}")
+            logging.debug(f"- rs4a_dataframe: {rs4a_dataframe.describe()}")
+            logging.debug(f"- weights_dataframe: {weights_dataframe.describe()}")
 
         except Exception as exception:
             message = f"{str(exception)}"
