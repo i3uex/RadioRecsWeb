@@ -33,11 +33,26 @@
           <h2>Prediction</h2>
           <ol class="list-group" id="prediction">
           </ol>
+          <br/>
+          <div id="feedback" style="display:none">
+            <h3>Feedback</h3>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio1">I've listened to the first recommendation</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio2">I've listened to a recommendation other than the first one</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio2">I've not listened to any recommendation</label>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <div id="start_button_div" class="row justify-content-center margin_bot">
-            <button type="button" id="restart_button" class="btn btn-primary disabled" onclick="restart()">Start
-            </button>
+            <button type="button" id="restart_button" class="btn btn-primary disabled" onclick="restart()">Submit and Restart</button>
           </div>
           <p class="text-center small" id="patient_warning" style="display:none">Predictions may take time, please be
             patient</p>

@@ -44,9 +44,10 @@ function populatePredictionList(prediction) {
 }
 
 function stopProcessing() {
-    $('#restart_button').html('Restart')
+    $('#restart_button').html("Submit and Restart")
     $("#restart_button").removeClass("disabled")
     $("#patient_warning").hide()
+    $("#feedback").show()
 }
 
 function restart() {
