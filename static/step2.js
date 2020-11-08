@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:9090/music_genres",
+        url: "http://compareml.io:9090/music_genres",
 
         success: function (musicGenres) {
             const musicGenresParsed = JSON.parse(musicGenres)
