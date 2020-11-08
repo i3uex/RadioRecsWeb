@@ -34,8 +34,11 @@ class RecommendationSystem(object):
                       f"programs={programs})")
 
         try:
+            voice_percentage = int(voice_percentage)
+            music_percentage = 100 - voice_percentage
+
             rs1a_response = RecommendationSystem.rs1a(
-                voice_percentage
+                music_percentage, voice_percentage
             )
             rs2a_response = RecommendationSystem.rs2a(
                 music_genres
@@ -84,6 +87,14 @@ class RecommendationSystem(object):
             ]
             weights_dataframe.set_index("program_name", inplace=True)
 
+            weights_dataframe["wrs"] = \
+                0.25 * weights_dataframe["wrs1a"] + \
+                0.75 * (
+                        music_percentage * weights_dataframe["wrs2a"] +
+                        voice_percentage * (weights_dataframe["wrs3a"] + weights_dataframe["wrs4a"]) / 2
+                )
+            weights_dataframe.sort_values(by=["wrs"], ascending=False, inplace=True)
+
             logging.debug(f"- rs1a_dataframe: {rs1a_dataframe.describe()}")
             logging.debug(f"- rs2a_dataframe: {rs2a_dataframe.describe()}")
             logging.debug(f"- rs3a_dataframe: {rs3a_dataframe.describe()}")
@@ -97,12 +108,11 @@ class RecommendationSystem(object):
         return "yeah"
 
     @staticmethod
-    def rs1a(voice_percentage):
+    def rs1a(music_percentage, voice_percentage):
         logging.debug(f"RecommendationSystem.rs1a("
                       f"voice_percentage={voice_percentage})")
 
         try:
-            music_percentage = 100 - int(voice_percentage)
             logging.debug(f"- music_percentage: {music_percentage}")
             url = f"http://localhost:9090/rs1a?voice={voice_percentage}&music={music_percentage}"
             logging.debug(f"- url: {url}")
@@ -220,3 +230,10 @@ class RecommendationSystem(object):
             raise cherrypy.HTTPError(500, message=message)
 
         return response
+
+    @staticmethod
+    def calculate_weight(row):
+        music_percentage = 0.5
+        voice_percentage = 0.5
+        return 0.25 * row["wrs1a"] + \
+               0.75 * (music_percentage * row["wrs2a"] + voice_percentage * (row["wrs3a"] + row["wrs4a"]) / 2)
