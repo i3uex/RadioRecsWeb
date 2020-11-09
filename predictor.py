@@ -74,14 +74,15 @@ class RecommendationSystem(object):
             rs3a_dataframe = pandas.read_json(rs3a_response.text, orient="records")
             rs4a_dataframe = pandas.read_json(rs4a_response.text, orient="records")
 
-            programs_string = programs[0]
-            if programs_string != "":
-                programs_list = programs_string.replace(",", "|")
+            program_names_string = programs[0]
+            if program_names_string != "":
+                programs_name_list = program_names_string.replace(",", "|")
+                programs = RecommendationSystem.get_programs(programs_name_list)
 
-                rs1b_response = RecommendationSystem.rsb(1, programs_list)
-                rs2b_response = RecommendationSystem.rsb(2, programs_list)
-                rs3b_response = RecommendationSystem.rsb(3, programs_list)
-                rs4b_response = RecommendationSystem.rsb(4, programs_list)
+                rs1b_response = RecommendationSystem.rsb(1, programs)
+                rs2b_response = RecommendationSystem.rsb(2, programs)
+                rs3b_response = RecommendationSystem.rsb(3, programs)
+                rs4b_response = RecommendationSystem.rsb(4, programs)
 
                 rs1b_dataframe = pandas.read_json(rs1b_response.text, orient="records")
                 rs2b_dataframe = pandas.read_json(rs2b_response.text, orient="records")
@@ -282,6 +283,22 @@ class RecommendationSystem(object):
             raise cherrypy.HTTPError(500, message=message)
 
         return response
+
+    @staticmethod
+    def get_programs(program_names):
+        logging.debug(f"RecommendationSystem.get_programs("
+                      f"program_names={program_names})")
+
+        try:
+            url = f"http://localhost:9090/programs?like={program_names}"
+            logging.debug(f"- url: {url}")
+            response = requests.get(url)
+            logging.debug(f"- response.status_code: {response.status_code}")
+        except Exception as exception:
+            message = f"{str(exception)}"
+            raise cherrypy.HTTPError(500, message=message)
+
+        return json.loads(response.text)
 
     @staticmethod
     def rsb(service, programs):

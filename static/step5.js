@@ -3,7 +3,7 @@ $(document).ready(function () {
     // Get providers and algorithms
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.hostname + ":9090/programs",
+        url: "http://" + window.location.hostname + ":9090/program_names",
 
         success: function (programs) {
             const programsParsed = JSON.parse(programs)
