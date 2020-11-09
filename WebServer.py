@@ -82,11 +82,11 @@ class SaveFeedbackService(object):
             file_name = "feedback.csv"
             if not os.path.isfile(file_name):
                 file = open("feedback.csv", "a")
-                file.write("feedback\n")
+                file.write("feedback,ip\n")
                 file.close()
 
             file = open("feedback.csv", "a")
-            file.write(f"{feedback}\n")
+            file.write(f"{feedback},{cherrypy.request.remote.ip}\n")
             file.close()
         except Exception as exception:
             message = f"{str(exception)}"
