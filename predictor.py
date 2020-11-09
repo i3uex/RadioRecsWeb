@@ -203,17 +203,18 @@ class RecommendationSystem(object):
         try:
             topics_list = topics[0].split(",")
             topics_arguments = ""
-            if "informativo" in topics_list:
+
+            if "news" in topics_list:
                 topics_arguments += "news=1&"
             else:
                 topics_arguments += "news=0&"
 
-            if "deportes" in topics_list:
+            if "sport" in topics_list:
                 topics_arguments += "sport=1&"
             else:
                 topics_arguments += "sport=0&"
 
-            if "entretenimiento" in topics_list:
+            if "entertainment" in topics_list:
                 topics_arguments += "entertainment=1&"
             else:
                 topics_arguments += "entertainment=0&"
@@ -223,7 +224,7 @@ class RecommendationSystem(object):
             else:
                 topics_arguments += "musical=0&"
 
-            if "educacion" in topics_list:
+            if "education" in topics_list:
                 topics_arguments += "education=1"
             else:
                 topics_arguments += "education=0"
