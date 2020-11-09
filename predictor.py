@@ -177,15 +177,17 @@ class RecommendationSystem(object):
                       f"music_genres={music_genres})")
 
         try:
-            music_genres_list = music_genres[0].split(",")
-            music_genres_argument = ""
-            for music_genre in music_genres_list:
-                logging.debug(f"- music_genre: {music_genre}")
-                music_genres_argument += f"{music_genre}=1&"
-            if music_genres_argument != "":
-                music_genres_argument = music_genres_argument[:-1]
-            logging.debug(f"- music_genres_argument: {music_genres_argument}")
-            url = f"http://localhost:9090/rs2a?{music_genres_argument}"
+            url = "http://localhost:9090/rs2a"
+            if music_genres[0] != "":
+                music_genres_list = music_genres[0].split(",")
+                music_genres_argument = ""
+                for music_genre in music_genres_list:
+                    logging.debug(f"- music_genre: {music_genre}")
+                    music_genres_argument += f"{music_genre}=1&"
+                if music_genres_argument != "":
+                    music_genres_argument = music_genres_argument[:-1]
+                logging.debug(f"- music_genres_argument: {music_genres_argument}")
+                url = f"{url}?{music_genres_argument}"
             logging.debug(f"- url: {url}")
             response = requests.get(url)
             logging.debug(f"- response.status_code: {response.status_code}")
@@ -201,36 +203,38 @@ class RecommendationSystem(object):
                       f"topics={topics})")
 
         try:
-            topics_list = topics[0].split(",")
-            topics_arguments = ""
+            url = "http://localhost:9090/rs3a"
+            if topics[0] != "":
+                topics_list = topics[0].split(",")
+                topics_arguments = ""
 
-            if "news" in topics_list:
-                topics_arguments += "news=1&"
-            else:
-                topics_arguments += "news=0&"
+                if "news" in topics_list:
+                    topics_arguments += "news=1&"
+                else:
+                    topics_arguments += "news=0&"
 
-            if "sport" in topics_list:
-                topics_arguments += "sport=1&"
-            else:
-                topics_arguments += "sport=0&"
+                if "sport" in topics_list:
+                    topics_arguments += "sport=1&"
+                else:
+                    topics_arguments += "sport=0&"
 
-            if "entertainment" in topics_list:
-                topics_arguments += "entertainment=1&"
-            else:
-                topics_arguments += "entertainment=0&"
+                if "entertainment" in topics_list:
+                    topics_arguments += "entertainment=1&"
+                else:
+                    topics_arguments += "entertainment=0&"
 
-            if "musical" in topics_list:
-                topics_arguments += "musical=1&"
-            else:
-                topics_arguments += "musical=0&"
+                if "musical" in topics_list:
+                    topics_arguments += "musical=1&"
+                else:
+                    topics_arguments += "musical=0&"
 
-            if "education" in topics_list:
-                topics_arguments += "education=1"
-            else:
-                topics_arguments += "education=0"
+                if "education" in topics_list:
+                    topics_arguments += "education=1"
+                else:
+                    topics_arguments += "education=0"
 
-            logging.debug(f"- topics_arguments: {topics_arguments}")
-            url = f"http://localhost:9090/rs3a?{topics_arguments}"
+                logging.debug(f"- topics_arguments: {topics_arguments}")
+                url = f"{url}?{topics_arguments}"
             logging.debug(f"- url: {url}")
             response = requests.get(url)
             logging.debug(f"- response.status_code: {response.status_code}")
