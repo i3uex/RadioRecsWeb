@@ -51,5 +51,5 @@ function stopProcessing() {
 }
 
 function restart() {
-    window.location.href = "/static/";
+    $("#form").submit()
 }

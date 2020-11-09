@@ -1,6 +1,7 @@
 import json
 import logging
 import uuid
+import os.path
 
 import cherrypy
 from predictor import RecommendationSystem
@@ -62,3 +63,32 @@ class MakePredictionService(object):
             raise cherrypy.HTTPError(500, message=message)
 
         return result
+
+
+@cherrypy.expose
+class SaveFeedbackService(object):
+    @cherrypy.tools.accept(media='text/plain')
+    def POST(self, data):
+        """
+        Serves the data needed to render the home page
+        """
+        logging.debug(f"SaveFeedbackService.POST("
+                      f"data={data})")
+
+        try:
+            options = json.loads(data)
+            feedback = options["feedback"]
+
+            file_name = "feedback.csv"
+            if not os.path.isfile(file_name):
+                file = open("feedback.csv", "a")
+                file.write("feedback\n")
+                file.close()
+
+            file = open("feedback.csv", "a")
+            file.write(f"{feedback}\n")
+            file.close()
+        except Exception as exception:
+            message = f"{str(exception)}"
+            logging.error(message)
+            raise cherrypy.HTTPError(500, message=message)

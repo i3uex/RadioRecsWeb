@@ -5,7 +5,7 @@ import os
 import cherrypy
 
 import constants as c
-from WebServer import WebServer, MakePredictionService
+from WebServer import WebServer, MakePredictionService, SaveFeedbackService
 from constants import *
 
 
@@ -43,6 +43,7 @@ def start_server(environment):
 
     webapp = WebServer()
     webapp.make_prediction = MakePredictionService()
+    webapp.save_feedback = SaveFeedbackService()
     cherrypy.quickstart(webapp, '/', "app.ini")
 
 
