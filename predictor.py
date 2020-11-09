@@ -74,8 +74,9 @@ class RecommendationSystem(object):
             rs3a_dataframe = pandas.read_json(rs3a_response.text, orient="records")
             rs4a_dataframe = pandas.read_json(rs4a_response.text, orient="records")
 
-            if programs:
-                programs_list = programs[0].replace(",", "|")
+            programs_string = programs[0]
+            if programs_string != "":
+                programs_list = programs_string.replace(",", "|")
 
                 rs1b_response = RecommendationSystem.rsb(1, programs_list)
                 rs2b_response = RecommendationSystem.rsb(2, programs_list)
