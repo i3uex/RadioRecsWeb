@@ -1,5 +1,6 @@
 const musicUrl = "/static/step2.html"
 const toneUrl = "/static/step3.html"
+const topicsUrl = "/static/step4.html"
 const summaryUrl = "/static/step6.html"
 
 const queryString = window.location.search
@@ -48,9 +49,8 @@ $(document).ready(function() {
     }
 
     if (window.location.pathname === musicUrl && voicePercentage > 50) {
-        $("#form").attr("action", summaryUrl)
+        $("#form").attr("action", topicsUrl)
     }
-
 
     if (window.location.pathname === summaryUrl) {
         const musicPercentageDisplayItem = $("#musicPercentageDisplay")
