@@ -1,9 +1,11 @@
+import datetime
 import json
 import logging
-import uuid
 import os.path
+import uuid
 
 import cherrypy
+
 from predictor import RecommendationSystem
 
 
@@ -80,17 +82,25 @@ class SaveFeedbackService(object):
             feedback = options["feedback"]
             ip = cherrypy.request.remote.ip
             user_agent = cherrypy.request.headers["User-Agent"]
+            timestamp = SaveFeedbackService.get_timestamp()
 
             file_name = "feedback.csv"
             if not os.path.isfile(file_name):
                 file = open("feedback.csv", "a")
-                file.write("feedback,ip,user_agent\n")
+                file.write("feedback,ip,user_agent,timestamp\n")
                 file.close()
 
             file = open("feedback.csv", "a")
-            file.write(f"{feedback},{ip},{user_agent}\n")
+            file.write(f"{feedback},{ip},{user_agent},{timestamp}\n")
             file.close()
         except Exception as exception:
             message = f"{str(exception)}"
             logging.error(message)
             raise cherrypy.HTTPError(500, message=message)
+
+    @staticmethod
+    def get_timestamp():
+        logging.debug(f"get_timestamp()")
+
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        return timestamp
