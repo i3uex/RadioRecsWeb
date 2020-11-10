@@ -313,7 +313,8 @@ class RecommendationSystem(object):
                       f"programs={programs})")
 
         try:
-            url = f"http://localhost:9090/rs{service}b?like={programs}"
+            program_list = '|'.join(programs)
+            url = f"http://localhost:9090/rs{service}b?like={program_list}"
             logging.debug(f"- url: {url}")
             response = requests.get(url)
             logging.debug(f"- response.status_code: {response.status_code}")
