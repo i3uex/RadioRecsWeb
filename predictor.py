@@ -136,7 +136,13 @@ class RecommendationSystem(object):
                         voice_percentage * (weights_dataframe["wrs3"] + weights_dataframe["wrs4"]) / 2
                 )
             weights_dataframe.sort_values(by=["wrs"], ascending=False, inplace=True)
-            result = weights_dataframe.index.values.tolist()[:5]
+            recommended_program_names = weights_dataframe.index.values.tolist()[:20]
+            recommended_program_weights = weights_dataframe["wrs"].tolist()[:20]
+
+            result = []
+            for index, recommended_program_name in enumerate(recommended_program_names):
+                recommended_program_weight = recommended_program_weights[index]
+                result.append(f"{recommended_program_name} ({recommended_program_weight})")
 
             logging.debug(f"- rs1a_dataframe: {rs1a_dataframe.describe()}")
             logging.debug(f"- rs1b_dataframe: {rs1b_dataframe.describe()}")
