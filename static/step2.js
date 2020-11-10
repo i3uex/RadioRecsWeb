@@ -8,8 +8,9 @@ $(document).ready(function () {
             const musicGenresParsed = JSON.parse(musicGenres)
             populateMusicGenresList(musicGenresParsed)
         },
-        error: function () {
-            alert('fail');
+        error: function (request) {
+            const errorMessage = request.responseText.trim()
+            alert(errorMessage)
         }
     });
 });

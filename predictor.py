@@ -151,7 +151,7 @@ class RecommendationSystem(object):
 
         except Exception as exception:
             message = f"{str(exception)}"
-            raise cherrypy.HTTPError(500, message=message)
+            raise Exception(message)
 
         return json.dumps(result)
 
@@ -241,7 +241,7 @@ class RecommendationSystem(object):
             logging.debug(f"- response.status_code: {response.status_code}")
         except Exception as exception:
             message = f"{str(exception)}"
-            raise cherrypy.HTTPError(500, message=message)
+            raise Exception(message)
 
         return response
 

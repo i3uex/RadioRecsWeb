@@ -9,8 +9,9 @@ $(document).ready(function () {
             const programsParsed = JSON.parse(programs)
             populateProgramsList(programsParsed)
         },
-        error: function () {
-            alert('fail');
+        error: function (request) {
+            const errorMessage = request.responseText.trim()
+            alert(errorMessage)
         }
     });
 });

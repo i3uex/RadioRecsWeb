@@ -22,9 +22,9 @@ function saveFeedback() {
         success: function () {
             console.log("Feedback saved successfully")
         },
-        error: function (errorMessage) {
-            console.log("Error saving feedback")
-            console.log(errorMessage)
+        error: function (request) {
+            const errorMessage = request.responseText.trim()
+            alert(errorMessage)
         }
     });
 }

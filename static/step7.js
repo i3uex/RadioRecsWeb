@@ -30,7 +30,8 @@ function makePrediction() {
             populatePredictionList(predictionParsed)
             stopProcessing()
         },
-        error: function (errorMessage) {
+        error: function (request) {
+            const errorMessage = request.responseText.trim()
             alert(errorMessage)
             stopProcessing()
         }

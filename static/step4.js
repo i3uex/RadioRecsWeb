@@ -9,8 +9,9 @@ $(document).ready(function () {
             const topicsParsed = JSON.parse(topics)
             populateTopicsList(topicsParsed)
         },
-        error: function () {
-            alert('fail');
+        error: function (request) {
+            const errorMessage = request.responseText.trim()
+            alert(errorMessage)
         }
     });
 });
