@@ -39,9 +39,13 @@ function makePrediction() {
 }
 
 function populatePredictionList(prediction) {
-    prediction.forEach(program => {
-        $('<li class="list-group-item">' + program + '</li>').appendTo("#prediction")
-    })
+    console.log(prediction)
+    for (let program_name in prediction) {
+        if (prediction.hasOwnProperty(program_name)) {
+            let program_weight = prediction[program_name]
+            $('<li class="list-group-item">' + program_name + ' <sub>' + program_weight + '</sub></li>').appendTo("#prediction")
+        }
+    }
 }
 
 function stopProcessing() {

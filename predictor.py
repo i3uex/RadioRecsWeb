@@ -1,5 +1,6 @@
 import json
 import logging
+from decimal import Decimal
 
 import cherrypy
 import pandas
@@ -139,10 +140,11 @@ class RecommendationSystem(object):
             recommended_program_names = weights_dataframe.index.values.tolist()[:20]
             recommended_program_weights = weights_dataframe["wrs"].tolist()[:20]
 
-            result = []
+            result = {}
             for index, recommended_program_name in enumerate(recommended_program_names):
-                recommended_program_weight = recommended_program_weights[index]
-                result.append(f"{recommended_program_name} ({recommended_program_weight})")
+                recommended_program_weight = Decimal(recommended_program_weights[index]).quantize(Decimal(10) ** -5)
+                # result.append(f"{recommended_program_name} <sub>{recommended_program_weight}</sub>")
+                result[recommended_program_name] = str(recommended_program_weight)
 
             logging.debug(f"- rs1a_dataframe: {rs1a_dataframe.describe()}")
             logging.debug(f"- rs1b_dataframe: {rs1b_dataframe.describe()}")
