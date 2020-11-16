@@ -84,13 +84,13 @@ class SaveFeedbackService(object):
             user_agent = cherrypy.request.headers["User-Agent"]
             timestamp = SaveFeedbackService.get_timestamp()
 
-            file_name = "feedback.csv"
+            file_name = "static/feedback.csv"
             if not os.path.isfile(file_name):
-                file = open("feedback.csv", "a")
+                file = open("static/feedback.csv", "a")
                 file.write("feedback,ip,user_agent,timestamp\n")
                 file.close()
 
-            file = open("feedback.csv", "a")
+            file = open("static/feedback.csv", "a")
             file.write(f"{feedback},{ip},{user_agent},{timestamp}\n")
             file.close()
         except Exception as exception:
