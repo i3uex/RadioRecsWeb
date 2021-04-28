@@ -20,7 +20,11 @@ class RecommendationSystem(object):
             sadness_percentage,
             tentative_percentage,
             topics,
-            programs
+            programs,
+            voice_music_weight,
+            genres_weight,
+            topics_weight,
+            tones_weight
     ):
         logging.debug(f"RecommendationSystem.predict("
                       f"voice_percentage={voice_percentage}, "
@@ -33,7 +37,11 @@ class RecommendationSystem(object):
                       f"sadness_percentage={sadness_percentage}, "
                       f"tentative_percentage={tentative_percentage}, "
                       f"topics={topics}, "
-                      f"programs={programs})")
+                      f"programs={programs}, "
+                      f"voice_music_weight={voice_music_weight}, "
+                      f"genres_weight={genres_weight}, "
+                      f"topics_weight={topics_weight}, "
+                      f"topics_weight={topics_weight})")
 
         try:
             voice_percentage = int(voice_percentage) / 100

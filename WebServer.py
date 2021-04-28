@@ -45,6 +45,10 @@ class MakePredictionService(object):
             tentative_percentage = options["tentativePercentage"]
             topics = options["topics"]
             programs = options["programs"]
+            voice_music_weight = options["voiceMusicWeight"]
+            genres_weight = options["genresWeight"]
+            topics_weight = options["topicsWeight"]
+            tones_weight = options["tonesWeight"]
 
             result = RecommendationSystem.predict(
                 voice_percentage,
@@ -57,7 +61,11 @@ class MakePredictionService(object):
                 sadness_percentage,
                 tentative_percentage,
                 topics,
-                programs
+                programs,
+                voice_music_weight,
+                genres_weight,
+                topics_weight,
+                tones_weight
             )
         except Exception as exception:
             message = f"{str(exception)}"

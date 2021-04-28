@@ -14,8 +14,14 @@ function makePrediction() {
         sadnessPercentage: sadnessPercentage,
         tentativePercentage: tentativePercentage,
         topics: topics,
-        programs: programs
+        programs: programs,
+        voiceMusicWeight: voiceMusicWeight,
+        genresWeight: genresWeight,
+        topicsWeight: topicsWeight,
+        tonesWeight: tonesWeight
     });
+
+    console.log(data)
 
     $('#restart_button').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Processing...').addClass('disabled')
     $("#patient_warning").show()

@@ -28,37 +28,38 @@
 <section class="h-100">
   <header class="container h-100">
     <div class="d-flex flex-column">
-      <form action="index.html" method="get" id="form">
+      <form action="step8.html" method="get" id="form">
         <div class="form-group">
-          <h2>Recommendations</h2>
-          <p>Results are given in half-hour intervals, ordered according to the degree of affinity</p>
-          <ol class="list-group" id="prediction">
-          </ol>
-          <br/>
-          <div id="feedback" style="display:none">
-            <h2>Feedback</h2>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio1" name="feedback" class="custom-control-input" value="1" checked>
-              <label class="custom-control-label" for="customRadio1">I've listened to the first recommendation</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio2" name="feedback" class="custom-control-input" value="2">
-              <label class="custom-control-label" for="customRadio2">I've listened to a recommendation other than the first one</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio3" name="feedback" class="custom-control-input" value="3">
-              <label class="custom-control-label" for="customRadio3">I've not listened to any recommendation</label>
-            </div>
-          </div>
+          <h2>Weights</h2>
+          <label for="voiceMusicWeight" id="voiceMusicWeightLabel">Voice/Music Weight (50%)</label>
+          <input type="range" class="form-control-range" id="voiceMusicWeight" name="voiceMusicWeight"
+                 oninput="updateRange('voiceMusicWeight', 'voiceMusicWeightLabel', 'Voice/Music Weight')">
+          <label for="genresWeight" id="genresWeightLabel">Genres Weight (50%)</label>
+          <input type="range" class="form-control-range" id="genresWeight" name="genresWeight"
+                 oninput="updateRange('genresWeight', 'genresWeightLabel', 'Genres Weight')">
+          <label for="topicsWeight" id="topicsWeightLabel">Topics Weight (50%)</label>
+          <input type="range" class="form-control-range" id="topicsWeight" name="topicsWeight"
+                 oninput="updateRange('topicsWeight', 'topicsWeightLabel', 'Topics Weight')">
+          <label for="tonesWeight" id="tonesWeightLabel">Tones Weight (50%)</label>
+          <input type="range" class="form-control-range" id="tonesWeight" name="tonesWeight"
+                 oninput="updateRange('tonesWeight', 'tonesWeightLabel', 'Tones Weight')">
         </div>
-        <div class="form-group">
-          <div id="start_button_div" class="row justify-content-center margin_bot">
-            <button type="button" id="restart_button" class="btn btn-primary disabled" onclick="restart()">Submit and Restart</button>
-          </div>
-          <p class="text-center small" id="patient_warning" style="display:none">This process may take time, please be
-            patient</p>
-        </div>
+          <input type="hidden" name="voicePercentage" id="voicePercentage"/>
+          <input type="hidden" name="musicGenres" id="musicGenres"/>
+          <input type="hidden" name="analyticalPercentage" id="analyticalPercentage"/>
+          <input type="hidden" name="angerPercentage" id="angerPercentage"/>
+          <input type="hidden" name="confidentPercentage" id="confidentPercentage"/>
+          <input type="hidden" name="fearPercentage" id="fearPercentage"/>
+          <input type="hidden" name="joyPercentage" id="joyPercentage"/>
+          <input type="hidden" name="sadnessPercentage" id="sadnessPercentage"/>
+          <input type="hidden" name="tentativePercentage" id="tentativePercentage"/>
+          <input type="hidden" name="topics" id="topics"/>
+          <input type="hidden" name="programs" id="programs"/>
+          <input type="submit" class="btn btn-primary" value="Make Prediction"/>
       </form>
+    </div>
+    <div class="fixed-bottom">
+      D4
     </div>
   </header>
 </section>
@@ -77,7 +78,6 @@
 
 <!-- Custom client.js -->
 <script type="text/javascript" src="/static/client.js"></script>
-<script type="text/javascript" src="/static/step7.js"></script>
 
 </body>
 </html>

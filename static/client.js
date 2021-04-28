@@ -17,6 +17,10 @@ const sadnessPercentage = urlParams.get("sadnessPercentage")
 const tentativePercentage = urlParams.get("tentativePercentage")
 const topics = urlParams.getAll("topics")
 const programs = urlParams.getAll("programs")
+const voiceMusicWeight = urlParams.getAll("voiceMusicWeight")
+const genresWeight = urlParams.getAll("genresWeight")
+const topicsWeight = urlParams.getAll("topicsWeight")
+const tonesWeight = urlParams.getAll("tonesWeight")
 
 $(document).ready(function() {
     const musicPercentageItem = $("#musicPercentage")
@@ -31,6 +35,10 @@ $(document).ready(function() {
     const tentativePercentageItem = $("#tentativePercentage")
     const topicsItem = $("#topics")
     const programsItem = $("#programs")
+    const voiceMusicWeightItem = $("#voiceMusicWeight")
+    const genresWeightItem = $("#genresWeight")
+    const topicsWeightItem = $("#topicsWeight")
+    const tonesWeightItem = $("#tonesWeight")
 
     voicePercentageItem.val(voicePercentage)
     musicGenresItem.val(musicGenres)
@@ -43,6 +51,10 @@ $(document).ready(function() {
     tentativePercentageItem.val(tentativePercentage)
     topicsItem.val(topics)
     programsItem.val(programs)
+    voiceMusicWeightItem.val(voiceMusicWeight)
+    genresWeightItem.val(genresWeight)
+    topicsWeightItem.val(topicsWeight)
+    tonesWeightItem.val(tonesWeight)
 
     if (window.location.pathname === toneUrl && voicePercentage > 50) {
         $("#form").attr("action", musicUrl)
