@@ -88,6 +88,7 @@ class SaveFeedbackService(object):
         try:
             options = json.loads(data)
             feedback = options["feedback"]
+            position = options["position"]
             ip = cherrypy.request.remote.ip
             user_agent = cherrypy.request.headers["User-Agent"]
             timestamp = SaveFeedbackService.get_timestamp()
@@ -95,11 +96,11 @@ class SaveFeedbackService(object):
             file_name = "static/feedback.csv"
             if not os.path.isfile(file_name):
                 file = open("static/feedback.csv", "a")
-                file.write("feedback,ip,user_agent,timestamp\n")
+                file.write("feedback,position,ip,user_agent,timestamp\n")
                 file.close()
 
             file = open("static/feedback.csv", "a")
-            file.write(f"{feedback},{ip},{user_agent},{timestamp}\n")
+            file.write(f"{feedback},{position},{ip},{user_agent},{timestamp}\n")
             file.close()
         except Exception as exception:
             message = f"{str(exception)}"

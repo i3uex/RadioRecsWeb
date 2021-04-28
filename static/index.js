@@ -1,6 +1,7 @@
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 const feedback = urlParams.get("feedback")
+const position = urlParams.get("position")
 
 $(document).ready(function () {
     console.log("feedback: " + feedback)
@@ -11,7 +12,8 @@ $(document).ready(function () {
 
 function saveFeedback() {
     let data = JSON.stringify({
-        feedback: feedback
+        feedback: feedback,
+        position: position
     });
 
     $.ajax({
