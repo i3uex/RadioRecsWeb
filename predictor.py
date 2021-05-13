@@ -41,7 +41,7 @@ class RecommendationSystem(object):
                       f"voice_music_weight={voice_music_weight}, "
                       f"genres_weight={genres_weight}, "
                       f"topics_weight={topics_weight}, "
-                      f"topics_weight={topics_weight})")
+                      f"tones_weight={tones_weight})")
 
         try:
             voice_percentage = int(voice_percentage) / 100
