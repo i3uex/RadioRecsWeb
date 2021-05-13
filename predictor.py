@@ -53,6 +53,10 @@ class RecommendationSystem(object):
             joy_percentage = int(joy_percentage) / 100
             sadness_percentage = int(sadness_percentage) / 100
             tentative_percentage = int(tentative_percentage) / 100
+            voice_music_weight = int(voice_music_weight) / 100
+            genres_weight = int(genres_weight) / 100
+            topics_weight = int(topics_weight) / 100
+            tones_weight = int(tones_weight) / 100
 
             rs1a_response = RecommendationSystem.rs1a(
                 music_percentage, voice_percentage
@@ -137,6 +141,11 @@ class RecommendationSystem(object):
             weights_dataframe["wrs2"] = (weights_dataframe["wrs2a"] + weights_dataframe["wrs2b"]) / 2
             weights_dataframe["wrs3"] = (weights_dataframe["wrs3a"] + weights_dataframe["wrs3b"]) / 2
             weights_dataframe["wrs4"] = (weights_dataframe["wrs4a"] + weights_dataframe["wrs4b"]) / 2
+
+            weights_dataframe["wrs1"] = weights_dataframe["wrs1a"] * voice_music_weight
+            weights_dataframe["wrs2"] = weights_dataframe["wrs2a"] * genres_weight
+            weights_dataframe["wrs3"] = weights_dataframe["wrs3a"] * topics_weight
+            weights_dataframe["wrs4"] = weights_dataframe["wrs4a"] * tones_weight
 
             weights_dataframe["wrs"] = \
                 0.25 * weights_dataframe["wrs1"] + \
