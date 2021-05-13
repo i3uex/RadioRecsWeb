@@ -90,6 +90,11 @@ class SaveFeedbackService(object):
             feedback = options["feedback"]
             position = options["position"]
             will_listen = options["will_listen"]
+            voice_music_weight = options["voiceMusicWeight"]
+            genres_weight = options["genresWeight"]
+            topics_weight = options["topicsWeight"]
+            tones_weight = options["tonesWeight"]
+
             ip = cherrypy.request.remote.ip
             user_agent = cherrypy.request.headers["User-Agent"]
             timestamp = SaveFeedbackService.get_timestamp()
@@ -97,11 +102,17 @@ class SaveFeedbackService(object):
             file_name = "static/feedback.csv"
             if not os.path.isfile(file_name):
                 file = open("static/feedback.csv", "a")
-                file.write("feedback,position,will_listen,ip,user_agent,timestamp\n")
+                file.write(
+                    "feedback,position,will_listen,"
+                    "voice_music_weight,genres_weight,topics_weight,tones_weight,"
+                    "ip,user_agent,timestamp\n")
                 file.close()
 
             file = open("static/feedback.csv", "a")
-            file.write(f"{feedback},{position},{will_listen},{ip},{user_agent},{timestamp}\n")
+            file.write(
+                f"{feedback},{position},{will_listen},"
+                f"{voice_music_weight},{genres_weight},{topics_weight},{tones_weight},"
+                f"{ip},{user_agent},{timestamp}\n")
             file.close()
         except Exception as exception:
             message = f"{str(exception)}"
