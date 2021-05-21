@@ -31,18 +31,26 @@
       <form action="step8.html" method="get" id="form">
         <div class="form-group">
           <h2>Weights</h2>
-          <label for="voiceMusicWeight" id="voiceMusicWeightLabel">Voice/Music Weight (50%)</label>
-          <input type="range" class="form-control-range" id="voiceMusicWeight" name="voiceMusicWeight"
-                 oninput="updateRange('voiceMusicWeight', 'voiceMusicWeightLabel', 'Voice/Music Weight')">
-          <label for="genresWeight" id="genresWeightLabel">Genres Weight (50%)</label>
-          <input type="range" class="form-control-range" id="genresWeight" name="genresWeight"
-                 oninput="updateRange('genresWeight', 'genresWeightLabel', 'Genres Weight')">
-          <label for="topicsWeight" id="topicsWeightLabel">Topics Weight (50%)</label>
-          <input type="range" class="form-control-range" id="topicsWeight" name="topicsWeight"
-                 oninput="updateRange('topicsWeight', 'topicsWeightLabel', 'Topics Weight')">
-          <label for="tonesWeight" id="tonesWeightLabel">Tones Weight (50%)</label>
-          <input type="range" class="form-control-range" id="tonesWeight" name="tonesWeight"
-                 oninput="updateRange('tonesWeight', 'tonesWeightLabel', 'Tones Weight')">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="useCustomWeights">
+            <label class="form-check-label" for="useCustomWeights">
+              Use Custom Weights
+            </label>
+          </div><br/>
+          <div id="customWeights" disabled="disabled">
+            <label for="voiceMusicWeight" id="voiceMusicWeightLabel">Voice/Music Weight (50%)</label>
+            <input type="range" class="form-control-range" id="voiceMusicWeight" name="voiceMusicWeight"
+                   oninput="updateRange('voiceMusicWeight', 'voiceMusicWeightLabel', 'Voice/Music Weight')">
+            <label for="genresWeight" id="genresWeightLabel">Genres Weight (50%)</label>
+            <input type="range" class="form-control-range" id="genresWeight" name="genresWeight"
+                   oninput="updateRange('genresWeight', 'genresWeightLabel', 'Genres Weight')">
+            <label for="topicsWeight" id="topicsWeightLabel">Topics Weight (50%)</label>
+            <input type="range" class="form-control-range" id="topicsWeight" name="topicsWeight"
+                   oninput="updateRange('topicsWeight', 'topicsWeightLabel', 'Topics Weight')">
+            <label for="tonesWeight" id="tonesWeightLabel">Tones Weight (50%)</label>
+            <input type="range" class="form-control-range" id="tonesWeight" name="tonesWeight"
+                   oninput="updateRange('tonesWeight', 'tonesWeightLabel', 'Tones Weight')">
+          </div>
         </div>
           <input type="hidden" name="voicePercentage" id="voicePercentage"/>
           <input type="hidden" name="musicGenres" id="musicGenres"/>
