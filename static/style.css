@@ -9,7 +9,7 @@ html, body {
     width: 100vw;
 }
 
-div[disabled=disabled] {
+#customWeights {
   pointer-events: none;
   opacity: 0.4;
 }
