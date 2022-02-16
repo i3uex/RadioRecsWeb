@@ -19,7 +19,7 @@ class WebServer(object):
         session_id = str(uuid.uuid4())
         cherrypy.session["id"] = session_id
 
-        return open('static/', encoding='utf-8')
+        return open('/', encoding='utf-8')
 
 
 @cherrypy.expose
