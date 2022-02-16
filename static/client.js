@@ -1,7 +1,7 @@
-const musicUrl = "/static/step2.html"
-const toneUrl = "/static/step3.html"
-const topicsUrl = "/static/step4.html"
-const summaryUrl = "/static/step6.html"
+const musicUrl = "step2.html"
+const toneUrl = "step3.html"
+const topicsUrl = "step4.html"
+const summaryUrl = "step6.html"
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
@@ -56,15 +56,19 @@ $(document).ready(function() {
     topicsWeightItem.val(topicsWeight)
     tonesWeightItem.val(tonesWeight)
 
-    if (window.location.pathname === toneUrl && voicePercentage > 50) {
+    let path = window.location.pathname
+    let pathSegments = path.split("/")
+    let pathLastSegment = pathSegments.pop()
+
+    if (pathLastSegment === toneUrl && voicePercentage > 50) {
         $("#form").attr("action", musicUrl)
     }
 
-    if (window.location.pathname === musicUrl && voicePercentage > 50) {
+    if (pathLastSegment === musicUrl && voicePercentage > 50) {
         $("#form").attr("action", topicsUrl)
     }
 
-    if (window.location.pathname === summaryUrl) {
+    if (pathLastSegment === summaryUrl) {
         const musicPercentageDisplayItem = $("#musicPercentageDisplay")
         const voicePercentageDisplayItem = $("#voicePercentageDisplay")
         const musicGenresDisplayItem = $("#musicGenresDisplay")
