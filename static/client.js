@@ -1,7 +1,7 @@
-const musicUrl = "/static/step2.html"
-const toneUrl = "/static/step3.html"
-const topicsUrl = "/static/step4.html"
-const summaryUrl = "/static/step6.html"
+const musicUrl = "static/step2.html"
+const toneUrl = "static/step3.html"
+const topicsUrl = "static/step4.html"
+const summaryUrl = "static/step6.html"
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Requirements.
 
+### Changed
+
+- Use relative URLs.
+
 ## [0.0.5] - 2019-07-24
 
 ### Added

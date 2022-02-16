@@ -29,7 +29,7 @@ function saveFeedback() {
     $.ajax({
         type: "POST",
         data: {data},
-        url: "/save_feedback",
+        url: "save_feedback",
 
         success: function () {
             console.log("Feedback saved successfully")
