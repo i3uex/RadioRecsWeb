@@ -29,7 +29,7 @@ function makePrediction() {
     $.ajax({
         type: "POST",
         data: {data},
-        url: "make_prediction",
+        url: "/make_prediction",
 
         success: function (prediction) {
             const predictionParsed = JSON.parse(prediction)
