@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.hostname + ":9090/music_genres",
+        url: "https://" + window.location.hostname + "/radiorecsservices/music_genres",
 
         success: function (musicGenres) {
             const musicGenresParsed = JSON.parse(musicGenres)

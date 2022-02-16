@@ -3,7 +3,7 @@ $(document).ready(function () {
     // Get providers and algorithms
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.hostname + ":9090/topics",
+        url: "https://" + window.location.hostname + "/radiorecsservices/topics",
 
         success: function (topics) {
             const topicsParsed = JSON.parse(topics)
