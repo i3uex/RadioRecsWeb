@@ -58,7 +58,7 @@ $(document).ready(function() {
 
     let path = window.location.pathname
     let pathSegments = path.split("/")
-    let pathLastSegment = partSegments.pop()
+    let pathLastSegment = pathSegments.pop()
 
     if (pathLastSegment === toneUrl && voicePercentage > 50) {
         $("#form").attr("action", musicUrl)
