@@ -1,6 +1,6 @@
 # README
 
-Web used by our Radio Recommendation system.
+Web used by our Radio Recommendation system. It requires our [Radio Recommendation services][services] to be deployed.
 
 ## How to start the web
 
@@ -57,6 +57,8 @@ sh restart.sh
 
 This script just calls `start.sh` and then `stop.sh`.
 
+[services]: https://github.com/i3uex/RadioRecsServices "Owner avatar
+RadioRecsServices"
 [vagrant]: https://www.vagrantup.com "Development Environments Made Easy"
 [ansible]: https://www.ansible.com "Automation for everyone"
 [web]: http://localhost:8080 "Web at localhost"
