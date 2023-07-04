@@ -28,39 +28,25 @@
 <section class="h-100">
   <header class="container h-100">
     <div class="d-flex flex-column">
-      <form action="step4.html" method="get" id="form">
+      <form action="step6.html" method="get" id="form">
         <div class="form-group">
-          <h2>Voice options</h2>
-          <h4>Tone</h4>
-          <label for="analyticalPercentage" id="analyticalPercentageLabel">Analytical (50%)</label>
-          <input type="range" class="form-control-range" id="analyticalPercentage" name="analyticalPercentage"
-                 oninput="updateRange('analyticalPercentage', 'analyticalPercentageLabel', 'Analytical')">
-          <label for="angerPercentage" id="angerPercentageLabel">Anger (50%)</label>
-          <input type="range" class="form-control-range" id="angerPercentage" name="angerPercentage"
-                 oninput="updateRange('angerPercentage', 'angerPercentageLabel', 'Anger')">
-          <label for="confidentPercentage" id="confidentPercentageLabel">Confident (50%)</label>
-          <input type="range" class="form-control-range" id="confidentPercentage" name="confidentPercentage"
-                 oninput="updateRange('confidentPercentage', 'confidentPercentageLabel', 'Confident')">
-          <label for="fearPercentage" id="fearPercentageLabel">Fear (50%)</label>
-          <input type="range" class="form-control-range" id="fearPercentage" name="fearPercentage"
-                 oninput="updateRange('fearPercentage', 'fearPercentageLabel', 'Fear')">
-          <label for="joyPercentage" id="joyPercentageLabel">Joy (50%)</label>
-          <input type="range" class="form-control-range" id="joyPercentage" name="joyPercentage"
-                 oninput="updateRange('joyPercentage', 'joyPercentageLabel', 'Joy')">
-          <label for="sadnessPercentage" id="sadnessPercentageLabel">Sadness (50%)</label>
-          <input type="range" class="form-control-range" id="sadnessPercentage" name="sadnessPercentage"
-                 oninput="updateRange('sadnessPercentage', 'sadnessPercentageLabel', 'Sadness')">
-          <label for="tentativePercentage" id="tentativePercentageLabel">Tentative (50%)</label>
-          <input type="range" class="form-control-range" id="tentativePercentage" name="tentativePercentage"
-                 oninput="updateRange('tentativePercentage', 'tentativePercentageLabel', 'Tentative')">
+          <h2>Programs</h2>
+          <label for="programs">Please, indicate the radio programs that you listen on a regular basis. <b>NOTE:</b> Anonymous users do not fill this form.</label>
+          <select class="custom-select" multiple id="programs" name="programs">
+          </select>
         </div>
         <input type="hidden" name="voicePercentage" id="voicePercentage"/>
         <input type="hidden" name="musicGenres" id="musicGenres"/>
+        <input type="hidden" name="analyticalPercentage" id="analyticalPercentage"/>
+        <input type="hidden" name="angerPercentage" id="angerPercentage"/>
+        <input type="hidden" name="confidentPercentage" id="confidentPercentage"/>
+        <input type="hidden" name="fearPercentage" id="fearPercentage"/>
+        <input type="hidden" name="joyPercentage" id="joyPercentage"/>
+        <input type="hidden" name="sadnessPercentage" id="sadnessPercentage"/>
+        <input type="hidden" name="tentativePercentage" id="tentativePercentage"/>
+        <input type="hidden" name="topics" id="topics"/>
         <input type="submit" class="btn btn-primary" value="Next"/>
       </form>
-    </div>
-    <div class="fixed-bottom">
-      D4
     </div>
   </header>
 </section>
@@ -79,6 +65,7 @@
 
 <!-- Custom client.js -->
 <script type="text/javascript" src="client.js"></script>
+<script type="text/javascript" src="step5.js"></script>
 
 </body>
 </html>

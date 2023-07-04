@@ -5,7 +5,7 @@ import os
 import cherrypy
 
 import constants as c
-from WebServer import WebServer, GetOptionsService, SetOptionsService
+from WebServer import WebServer, MakePredictionService, SaveFeedbackService
 from constants import *
 
 
@@ -42,8 +42,8 @@ def start_server(environment):
     cherrypy.config.update({'error_page.500': error_page_500})
 
     webapp = WebServer()
-    webapp.get_options = GetOptionsService()
-    webapp.set_options = SetOptionsService()
+    webapp.make_prediction = MakePredictionService()
+    webapp.save_feedback = SaveFeedbackService()
     cherrypy.quickstart(webapp, '/', "app.ini")
 
 
